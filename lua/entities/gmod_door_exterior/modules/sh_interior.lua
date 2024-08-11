@@ -1,7 +1,7 @@
 -- Adds an interior
 
-require("niknaks")
-NikNaks()
+-- require("niknaks")
+-- NikNaks()
 
 TARDIS_GLOBAL_CACHED_INTPOS = nil -- init the intpos that is to be cached
 
@@ -24,8 +24,8 @@ if SERVER then
         td.maxs = e.maxs or e:OBBMaxs()
 
         local max = 16384
-        local mapmaxs = NikNaks.CurrentMap:WorldMax()
-        local mapmins = NikNaks.CurrentMap:WorldMin()
+        -- local mapmaxs = NikNaks.CurrentMap:WorldMax()
+        -- local mapmins = NikNaks.CurrentMap:WorldMin()
 
 
         local tries = GetConVar("hugoextension_tardis2_IntPositionAttempts"):GetInt()  -- doing this through the key instead?
@@ -80,7 +80,7 @@ if SERVER then
 
                             if self:CallHook("AllowInteriorPos",nil,nowhere,mins,maxs) ~= false then  -- literally no fucking idea what defines this function
 
-                                if not NikNaks.CurrentMap:IsOutsideMap(nowhere) then
+                                -- if not NikNaks.CurrentMap:IsOutsideMap(nowhere) then
 
                                 if util.QuickTrace(nowhere - Vector(0,0,-500), Vector(0,0,-100)).Hit == true then   -- some maps have no skybox brushes, meaning the map is exposed to the open void
                                                                                                                     -- in those cases the game thinks the map has 'space' to place an interior because it is all technically open
@@ -88,27 +88,27 @@ if SERVER then
                                                                                                                     -- basically this check just makes sure that map geometry actually exists where it spawns
                                 end
 
-                                end
+                                -- end
 
                             end
                     end
 
                 end
 
-                        local fallbackposnowhere = VectorRand(mapmins, mapmaxs)  -- this one is more localized to the map, ignoring the skybox it seems
+                        -- local fallbackposnowhere = VectorRand(mapmins, mapmaxs)  -- this one is more localized to the map, ignoring the skybox it seems
 
-                        if (not util.TraceHull(td).Hit) then
-                            if self:CallHook("AllowInteriorPos",nil,nowhere,mins,maxs) ~= false then
-                                if not NikNaks.CurrentMap:IsOutsideMap(nowhere) then
-                                    fallbackpos = fallbackposnowhere
-                                end
-                            end
-                        end
+                        -- if (not util.TraceHull(td).Hit) then
+                        --     if self:CallHook("AllowInteriorPos",nil,nowhere,mins,maxs) ~= false then
+                        --         if not NikNaks.CurrentMap:IsOutsideMap(nowhere) then
+                        --             fallbackpos = fallbackposnowhere
+                        --         end
+                        --     end
+                        -- end
 
         end
     end
         print ("located interior position via standard algorithm")
-            if highest == nil then  -- if it didnt find a location try again with niknaks' tools
+--[[             if highest == nil then  -- if it didnt find a location try again with niknaks' tools
 
                 highest = fallbackpos
                 print ("used niknaks emergency fallback interior spawn location")
@@ -126,7 +126,7 @@ if SERVER then
                     end
                 end
 
-            end
+            end ]]
 
 
         TARDIS_GLOBAL_CACHED_INTPOS = highest
